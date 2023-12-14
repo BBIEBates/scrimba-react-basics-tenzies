@@ -541,7 +541,7 @@ function App() {
       numDiceRolls = _React$useState6[0],
       setNumDiceRolls = _React$useState6[1];
 
-  var _React$useState7 = _react2.default.useState(1000),
+  var _React$useState7 = _react2.default.useState(localStorage.getItem("bestScore") || 1000),
       _React$useState8 = _slicedToArray(_React$useState7, 2),
       bestScore = _React$useState8[0],
       setBestScore = _React$useState8[1];
@@ -552,7 +552,6 @@ function App() {
       setCurrentlyPlaying = _React$useState10[1];
 
   _react2.default.useEffect(function () {
-
     var allHeld = dice.every(function (die) {
       return die.isHeld;
     });
@@ -569,6 +568,11 @@ function App() {
       }
     }
   }, [dice]);
+
+  _react2.default.useEffect(function () {
+    localStorage.setItem("bestScore", bestScore);
+    console.log("Score saved.");
+  }, [bestScore]);
 
   function allNewDice() {
     var newDice = [];
@@ -645,7 +649,7 @@ function App() {
         _react2.default.createElement(
           "span",
           null,
-          bestScore === 1000 ? "roll the dice!" : bestScore + " rolls"
+          bestScore == 1000 ? "roll the dice!" : bestScore + " rolls"
         )
       )
     ),

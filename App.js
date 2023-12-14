@@ -7,11 +7,10 @@ export default function App() {
   const [dice, setDice] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
   const [numDiceRolls, setNumDiceRolls] = React.useState(0);
-  const [bestScore, setBestScore] = React.useState(1000);
+  const [bestScore, setBestScore] = React.useState(localStorage.getItem("bestScore") || 1000);
   const [currentlyPlaying, setCurrentlyPlaying] = React.useState(true);
 
   React.useEffect(() => {
-
     const allHeld = dice.every(die => die.isHeld)
     const firstValue = dice[0].value
     const allSameValue = dice.every(die => die.value === firstValue)
@@ -24,6 +23,11 @@ export default function App() {
         }
     }
   }, [dice]);
+
+  React.useEffect( () => {    
+    localStorage.setItem("bestScore", bestScore);
+    console.log("Score saved.")
+  }, [bestScore]);
   
   function allNewDice() {
     let newDice = [];
@@ -83,7 +87,7 @@ export default function App() {
           Roll until all dice are the same. Click each die to freeze it at its
           current value between rolls.
         </p>
-        <p><b>Best score: </b><span>{bestScore === 1000 ? "roll the dice!" : bestScore + " rolls"}</span></p>
+        <p><b>Best score: </b><span>{bestScore == 1000 ? "roll the dice!" : bestScore + " rolls"}</span></p>
       </div>
       <div className="dice-container">{diceElements}</div>
       <div className="button-container">
