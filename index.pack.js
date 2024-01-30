@@ -525,6 +525,8 @@ var _reactConfetti2 = _interopRequireDefault(_reactConfetti);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function App() {
   var _React$useState = _react2.default.useState(allNewDice()),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -592,11 +594,7 @@ function App() {
     });
     setDice(function (oldDice) {
       return oldDice.map(function (die) {
-        return die.isHeld ? die : {
-          id: die.id,
-          isHeld: die.isHeld,
-          value: Math.ceil(Math.random() * 6)
-        };
+        return die.isHeld ? die : _defineProperty({ id: die.id, value: die.value }, "value", Math.ceil(Math.random() * 6));
       });
     });
   }

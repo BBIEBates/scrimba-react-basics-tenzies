@@ -47,7 +47,7 @@ export default function App() {
       oldDice.map((die) => {
         return die.isHeld
           ? die
-          : {...die, value: Math.ceil(Math.random() * 6)};
+          : {id: die.id, value: die.value, value: Math.ceil(Math.random() * 6)};
       })
     );
   }
@@ -56,7 +56,7 @@ export default function App() {
     setDice((oldDice) =>
       oldDice.map((die) => {
         return die.id === id
-          ? { ...die, isHeld: !die.isHeld }
+          ? { id: die.id, value: die.value, isHeld: !die.isHeld }
           : die;
       })
     );
